@@ -1,0 +1,123 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue117;\red242\green242\blue242;\red38\green38\blue38;
+\red0\green0\blue0;\red83\green85\blue2;\red82\green0\blue83;\red115\green0\blue2;\red16\green121\blue2;
+\red11\green84\blue83;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c53333;\cssrgb\c96078\c96078\c96078;\cssrgb\c20000\c20000\c20000;
+\cssrgb\c0\c0\c0;\cssrgb\c40000\c40000\c0;\cssrgb\c40000\c0\c40000;\cssrgb\c53333\c0\c0;\cssrgb\c0\c53333\c0;
+\cssrgb\c0\c40000\c40000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
+import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 talon\cf6 .\cf7 MicroAgentData\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 talon\cf6 .\cf7 MicroAgentID\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 talon\cf6 .\cf7 CompositeData\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 talon\cf6 .\cf7 TabularData\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 talon\cf6 .\cf7 MethodInvocation\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 talon\cf6 .\cf7 DataElement\cf6 ;\cf4 \
+\cf2 import\cf4  java\cf6 .\cf4 io\cf6 .\cf7 InputStream\cf6 ;\cf4 \
+\cf2 import\cf4  java\cf6 .\cf4 io\cf6 .\cf7 FileInputStream\cf6 ;\cf4 \
+\cf2 import\cf4  java\cf6 .\cf4 util\cf6 .\cf7 Properties\cf6 ;\cf4 \
+\cf2 import\cf4  java\cf6 .\cf4 util\cf6 .\cf7 HashMap\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 talon\cf6 .\cf7 Subscription\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 console\cf6 .\cf4 hawkeye\cf6 .\cf7 AgentManager\cf6 ;\cf4 \
+\cf2 import\cf4  COM\cf6 .\cf4 TIBCO\cf6 .\cf4 hawk\cf6 .\cf4 console\cf6 .\cf4 hawkeye\cf6 .\cf7 TIBHawkConsole\cf6 ;\cf4 \
+\cf2 import\cf4  javax\cf6 .\cf4 swing\cf6 .\cf7 SwingWorker\cf6 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf8 // \cf4 \
+\cf8 // Decompiled by Procyon v0.5.36\cf4 \
+\cf8 // \cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 public\cf4  \cf2 class\cf4  \cf7 Console\cf4  \cf2 extends\cf4  \cf7 SwingWorker\cf6 <\cf7 Integer\cf6 ,\cf4  \cf7 Object\cf6 []>\cf4 \
+\cf6 \{\cf4 \
+    \cf2 public\cf4  \cf2 static\cf4  \cf2 final\cf4  \cf7 String\cf4  tab \cf6 =\cf4  \cf9 "           "\cf6 ;\cf4 \
+    \cf7 TIBHawkConsole\cf4  _console\cf6 ;\cf4 \
+    \cf7 AgentManager\cf4  _agentMgr\cf6 ;\cf4 \
+    \cf7 Subscription\cf4  _subscription\cf6 ;\cf4 \
+    \cf7 HashMap\cf6 <\cf7 String\cf6 ,\cf4  \cf7 String\cf6 >\cf4  pathmapper\cf6 ;\cf4 \
+    \cf7 HashMap\cf6 <\cf7 String\cf6 ,\cf4  \cf7 String\cf6 >\cf4  as400map\cf6 ;\cf4 \
+    \cf2 public\cf4  \cf7 String\cf4  hawkDomain\cf6 ;\cf4 \
+    \cf2 public\cf4  \cf7 String\cf4  rvService\cf6 ;\cf4 \
+    \cf2 public\cf4  \cf7 String\cf4  rvNetwork\cf6 ;\cf4 \
+    \cf2 public\cf4  \cf7 String\cf4  rvDaemon\cf6 ;\cf4 \
+    \
+    \cf2 public\cf4  \cf7 Console\cf6 (\cf2 final\cf4  \cf7 String\cf4  hawkDomain\cf6 ,\cf4  \cf2 final\cf4  \cf7 String\cf4  rvService\cf6 ,\cf4  \cf2 final\cf4  \cf7 String\cf4  rvNetwork\cf6 ,\cf4  \cf2 final\cf4  \cf7 String\cf4  rvDaemon\cf6 )\cf4  \cf6 \{\cf4 \
+        \cf2 this\cf6 .\cf4 hawkDomain \cf6 =\cf4  hawkDomain\cf6 ;\cf4 \
+        \cf2 this\cf6 .\cf4 rvService \cf6 =\cf4  rvService\cf6 ;\cf4 \
+        \cf2 this\cf6 .\cf4 rvNetwork \cf6 =\cf4  rvNetwork\cf6 ;\cf4 \
+        \cf2 this\cf6 .\cf4 rvDaemon \cf6 =\cf4  rvDaemon\cf6 ;\cf4 \
+    \cf6 \}\cf4 \
+    \
+    \cf10 @Override\cf4 \
+    \cf2 protected\cf4  \cf7 Integer\cf4  doInBackground\cf6 ()\cf4  \cf2 throws\cf4  \cf7 Exception\cf4  \cf6 \{\cf4 \
+        \cf2 try\cf4  \cf6 \{\cf4 \
+            \cf2 final\cf4  \cf7 Properties\cf4  \cf7 BuildConfig\cf4  \cf6 =\cf4  \cf2 new\cf4  \cf7 Properties\cf6 ();\cf4 \
+            \cf7 BuildConfig\cf6 .\cf4 load\cf6 (\cf2 new\cf4  \cf7 FileInputStream\cf6 (\cf9 "./BuildConfig.properties"\cf6 ));\cf4 \
+            \cf7 System\cf6 .\cf4 setProperty\cf6 (\cf9 "path"\cf6 ,\cf4  \cf7 BuildConfig\cf6 .\cf4 getProperty\cf6 (\cf9 "RVHome"\cf6 ));\cf4 \
+            \cf7 System\cf6 .\cf4 loadLibrary\cf6 (\cf9 "tibrvj"\cf6 );\cf4 \
+            \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Loading Console"\cf6 ,\cf4  \cf9 "Hawk Domain: "\cf4  \cf6 +\cf4  \cf2 this\cf6 .\cf4 hawkDomain\cf6 ,\cf4  \cf9 "rvService: "\cf4  \cf6 +\cf4  \cf2 this\cf6 .\cf4 rvService\cf6 ,\cf4  \cf9 "rvNetwork: "\cf4  \cf6 +\cf4  \cf2 this\cf6 .\cf4 rvNetwork\cf6 ,\cf4  \cf9 "rvDaemon: "\cf4  \cf6 +\cf4  \cf2 this\cf6 .\cf4 rvDaemon \cf6 \}\cf4  \cf6 \});\cf4 \
+            \cf2 this\cf6 .\cf4 _console \cf6 =\cf4  \cf2 new\cf4  \cf7 TIBHawkConsole\cf6 (\cf2 this\cf6 .\cf4 hawkDomain\cf6 ,\cf4  \cf2 this\cf6 .\cf4 rvService\cf6 ,\cf4  \cf2 this\cf6 .\cf4 rvNetwork\cf6 ,\cf4  \cf2 this\cf6 .\cf4 rvDaemon\cf6 );\cf4 \
+            \cf6 (\cf2 this\cf6 .\cf4 _agentMgr \cf6 =\cf4  \cf2 this\cf6 .\cf4 _console\cf6 .\cf4 getAgentManager\cf6 ()).\cf4 initialize\cf6 ();\cf4 \
+            \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Agent Manager Initialized"\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+            \cf2 final\cf4  \cf7 MicroAgentID\cf6 []\cf4  mid \cf6 =\cf4  \cf2 this\cf6 .\cf4 _agentMgr\cf6 .\cf4 getMicroAgentIDs\cf6 (\cf9 "COM.TIBCO.admin.TRA"\cf6 ,\cf4  \cf10 1\cf6 );\cf4 \
+            \cf2 if\cf4  \cf6 (\cf4 mid\cf6 .\cf4 length \cf6 ==\cf4  \cf10 0\cf6 )\cf4  \cf6 \{\cf4 \
+                \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "ERROR"\cf6 ,\cf4  \cf9 "Microagent [COM.TIBCO.admin.TRA] not found"\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+            \cf6 \}\cf4 \
+            \cf7 System\cf6 .\cf2 out\cf6 .\cf4 println\cf6 (\cf9 "GetMicroAgentIDs Response:"\cf4  \cf6 +\cf4  mid\cf6 [\cf10 0\cf6 ]);\cf4 \
+            \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Invoked getMicroAgentIDs(COM.TIBCO.admin.TRA, 1"\cf6 ,\cf4  mid\cf6 [\cf10 0\cf6 ].\cf4 toString\cf6 ()\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+            \cf2 final\cf4  \cf7 DataElement\cf6 []\cf4  de \cf6 =\cf4  \cf6 \{\cf4  \cf2 new\cf4  \cf7 DataElement\cf6 (\cf9 "TimeInterval"\cf6 ,\cf4  \cf10 1\cf6 ),\cf4  \cf2 new\cf4  \cf7 DataElement\cf6 (\cf9 "FullStatusOnly"\cf6 ,\cf4  \cf2 true\cf6 )\cf4  \cf6 \};\cf4 \
+            \cf2 final\cf4  \cf7 MethodInvocation\cf4  mi \cf6 =\cf4  \cf2 new\cf4  \cf7 MethodInvocation\cf6 (\cf9 "onNewStatusOrCmd"\cf6 ,\cf4  de\cf6 );\cf4 \
+            \cf2 final\cf4  \cf7 MicroAgentData\cf4  md \cf6 =\cf4  \cf2 this\cf6 .\cf4 _agentMgr\cf6 .\cf4 invoke\cf6 (\cf4 mid\cf6 [\cf10 0\cf6 ],\cf4  mi\cf6 );\cf4 \
+            \cf2 final\cf4  \cf7 TabularData\cf4  tabData \cf6 =\cf4  \cf6 (\cf7 TabularData\cf6 )\cf4 md\cf6 .\cf4 getData\cf6 ();\cf4 \
+            \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Invoked onNewStatusOrCmd(1,true)"\cf6 ,\cf4  \cf9 "Returned results length:"\cf4  \cf6 +\cf4  tabData\cf6 .\cf4 getAllData\cf6 ().\cf4 length \cf6 \}\cf4  \cf6 \});\cf4 \
+            \cf2 if\cf4  \cf6 (\cf4 tabData\cf6 .\cf4 getAllData\cf6 ().\cf4 length \cf6 >\cf4  \cf10 0\cf6 )\cf4  \cf6 \{\cf4 \
+                \cf2 final\cf4  \cf7 Object\cf6 [][]\cf4  table \cf6 =\cf4  tabData\cf6 .\cf4 getAllData\cf6 ();\cf4 \
+                \cf2 int\cf4  m \cf6 =\cf4  \cf10 0\cf6 ;\cf4 \
+                \cf2 int\cf4  rowLength \cf6 =\cf4  \cf10 0\cf6 ;\cf4 \
+                \cf2 for\cf4  \cf6 (\cf2 int\cf4  j \cf6 =\cf4  \cf10 0\cf6 ;\cf4  j \cf6 <\cf4  table\cf6 .\cf4 length\cf6 ;\cf4  \cf6 ++\cf4 j\cf6 )\cf4  \cf6 \{\cf4 \
+                    \cf2 if\cf4  \cf6 (\cf4 table\cf6 [\cf4 j\cf6 ][\cf10 0\cf6 ].\cf4 equals\cf6 (\cf9 "INSTANCE"\cf6 )\cf4  \cf6 &&\cf4  \cf6 !\cf4 table\cf6 [\cf4 j\cf6 ][\cf10 9\cf6 ].\cf4 equals\cf6 (\cf9 "TIBCO Administrator"\cf6 ))\cf4  \cf6 \{\cf4 \
+                        \cf6 ++\cf4 rowLength\cf6 ;\cf4 \
+                    \cf6 \}\cf4 \
+                \cf6 \}\cf4 \
+                \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Total Number of Deployment instances: "\cf4  \cf6 +\cf4  rowLength \cf6 \}\cf4  \cf6 \});\cf4 \
+                \cf2 final\cf4  \cf7 Object\cf6 [][]\cf4  cells \cf6 =\cf4  \cf2 new\cf4  \cf7 Object\cf6 [\cf4 rowLength\cf6 ][\cf10 6\cf6 ];\cf4 \
+                \cf2 for\cf4  \cf6 (\cf2 int\cf4  i \cf6 =\cf4  \cf10 0\cf6 ;\cf4  i \cf6 <\cf4  table\cf6 .\cf4 length\cf6 ;\cf4  \cf6 ++\cf4 i\cf6 )\cf4  \cf6 \{\cf4 \
+                    \cf2 if\cf4  \cf6 (\cf4 table\cf6 [\cf4 i\cf6 ][\cf10 0\cf6 ].\cf4 equals\cf6 (\cf9 "INSTANCE"\cf6 )\cf4  \cf6 &&\cf4  \cf6 !\cf4 table\cf6 [\cf4 i\cf6 ][\cf10 9\cf6 ].\cf4 equals\cf6 (\cf9 "TIBCO Administrator"\cf6 ))\cf4  \cf6 \{\cf4 \
+                        \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Fetching "\cf4  \cf6 +\cf4  \cf6 (\cf4 m \cf6 +\cf4  \cf10 1\cf6 )\cf4  \cf6 +\cf4  \cf9 " of "\cf4  \cf6 +\cf4  rowLength \cf6 +\cf4  \cf9 " applications: "\cf4  \cf6 +\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 8\cf6 ]\cf4  \cf6 +\cf4  \cf9 "-"\cf4  \cf6 +\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 9\cf6 ]\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+                        \cf2 final\cf4  \cf7 DataElement\cf6 []\cf4  \cf7 Deployment\cf4  \cf6 =\cf4  \cf6 \{\cf4  \cf2 new\cf4  \cf7 DataElement\cf6 (\cf9 "Deployment"\cf6 ,\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 8\cf6 ])\cf4  \cf6 \};\cf4 \
+                        \cf2 final\cf4  \cf7 MethodInvocation\cf4  getDepStatus \cf6 =\cf4  \cf2 new\cf4  \cf7 MethodInvocation\cf6 (\cf9 "getDeploymentStatus"\cf6 ,\cf4  \cf7 Deployment\cf6 );\cf4 \
+                        \cf2 final\cf4  \cf7 MicroAgentData\cf4  depData \cf6 =\cf4  \cf2 this\cf6 .\cf4 _agentMgr\cf6 .\cf4 invoke\cf6 (\cf4 mid\cf6 [\cf10 0\cf6 ],\cf4  getDepStatus\cf6 );\cf4 \
+                        \cf2 final\cf4  \cf7 CompositeData\cf4  compData \cf6 =\cf4  \cf6 (\cf7 CompositeData\cf6 )\cf4 depData\cf6 .\cf4 getData\cf6 ();\cf4 \
+                        \cf2 final\cf4  \cf7 DataElement\cf6 []\cf4  rs \cf6 =\cf4  compData\cf6 .\cf4 getDataElements\cf6 ();\cf4 \
+                        \cf7 System\cf6 .\cf2 out\cf6 .\cf4 println\cf6 (\cf4 table\cf6 [\cf4 i\cf6 ][\cf10 0\cf6 ]\cf4  \cf6 +\cf4  \cf9 "--"\cf4  \cf6 +\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 8\cf6 ]\cf4  \cf6 +\cf4  \cf9 "--"\cf4  \cf6 +\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 9\cf6 ]\cf4  \cf6 +\cf4  \cf9 "--"\cf4  \cf6 +\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 10\cf6 ]\cf4  \cf6 +\cf4  \cf9 "\\r\\n"\cf4  \cf6 +\cf4  rs\cf6 [\cf10 2\cf6 ].\cf4 getValue\cf6 ());\cf4 \
+                        cells\cf6 [\cf4 m\cf6 ][\cf10 0\cf6 ]\cf4  \cf6 =\cf4  \cf2 new\cf4  \cf7 Boolean\cf6 (\cf2 false\cf6 );\cf4 \
+                        cells\cf6 [\cf4 m\cf6 ][\cf10 1\cf6 ]\cf4  \cf6 =\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 8\cf6 ];\cf4 \
+                        cells\cf6 [\cf4 m\cf6 ][\cf10 2\cf6 ]\cf4  \cf6 =\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 9\cf6 ];\cf4 \
+                        cells\cf6 [\cf4 m\cf6 ][\cf10 3\cf6 ]\cf4  \cf6 =\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 10\cf6 ];\cf4 \
+                        cells\cf6 [\cf4 m\cf6 ][\cf10 4\cf6 ]\cf4  \cf6 =\cf4  rs\cf6 [\cf10 2\cf6 ].\cf4 getValue\cf6 ();\cf4 \
+                        cells\cf6 [\cf4 m\cf6 ][\cf10 5\cf6 ]\cf4  \cf6 =\cf4  \cf9 "COM.TIBCO.ADAPTER.bwengine."\cf4  \cf6 +\cf4  \cf2 this\cf6 .\cf4 hawkDomain \cf6 +\cf4  \cf9 "."\cf4  \cf6 +\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 8\cf6 ]\cf4  \cf6 +\cf4  \cf9 "."\cf4  \cf6 +\cf4  table\cf6 [\cf4 i\cf6 ][\cf10 9\cf6 ];\cf4 \
+                        \cf2 final\cf4  \cf7 String\cf4  temp \cf6 =\cf4  rs\cf6 [\cf10 3\cf6 ].\cf4 getValue\cf6 ().\cf4 toString\cf6 ().\cf4 substring\cf6 (\cf4 rs\cf6 [\cf10 3\cf6 ].\cf4 getValue\cf6 ().\cf4 toString\cf6 ().\cf4 indexOf\cf6 (\cf9 "bwengine.exe\\" --run --propFile"\cf6 ));\cf4 \
+                        \cf2 final\cf4  \cf7 String\cf4  \cf7 PropFile\cf4  \cf6 =\cf4  temp\cf6 .\cf4 substring\cf6 (\cf10 0\cf6 ,\cf4  temp\cf6 .\cf4 indexOf\cf6 (\cf9 ".tra\\""\cf6 )\cf4  \cf6 +\cf4  \cf10 4\cf6 ).\cf4 replaceAll\cf6 (\cf9 "bwengine.exe\\" --run --propFile \\""\cf6 ,\cf4  \cf9 ""\cf6 );\cf4 \
+                        \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Completed fetching row "\cf4  \cf6 +\cf4  \cf6 (\cf4 m \cf6 +\cf4  \cf10 1\cf6 )\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+                        \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  cells\cf6 [\cf4 m\cf6 ]\cf4  \cf6 \});\cf4 \
+                        \cf2 this\cf6 .\cf4 setProgress\cf6 ((\cf4 m \cf6 +\cf4  \cf10 1\cf6 )\cf4  \cf6 *\cf4  \cf10 100\cf4  \cf6 /\cf4  rowLength\cf6 );\cf4 \
+                        \cf6 ++\cf4 m\cf6 ;\cf4 \
+                    \cf6 \}\cf4 \
+                \cf6 \}\cf4 \
+                \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "LOG"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": "\cf4  \cf6 +\cf4  m \cf6 +\cf4  \cf9 " rows out of "\cf4  \cf6 +\cf4  rowLength \cf6 +\cf4  \cf9 " returned to the UI"\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+                \cf2 return\cf4  \cf10 1\cf6 ;\cf4 \
+            \cf6 \}\cf4 \
+            \cf2 this\cf6 .\cf4 setProgress\cf6 (\cf10 100\cf6 );\cf4 \
+            \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "ERROR"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": No instances found for the domain. Check RV if there are any issues"\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+            \cf2 return\cf4  \cf10 0\cf6 ;\cf4 \
+        \cf6 \}\cf4 \
+        \cf2 catch\cf4  \cf6 (\cf7 Exception\cf4  e\cf6 )\cf4  \cf6 \{\cf4 \
+            \cf6 ((\cf7 SwingWorker\cf6 <\cf4 T\cf6 ,\cf4  \cf7 Object\cf6 []>)\cf2 this\cf6 ).\cf4 publish\cf6 (\cf2 new\cf4  \cf7 Object\cf6 [][]\cf4  \cf6 \{\cf4  \cf6 \{\cf4  \cf9 "ERROR"\cf6 ,\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 ()\cf4  \cf6 +\cf4  \cf9 ": Exception in "\cf4  \cf6 +\cf4  \cf2 this\cf6 .\cf4 getClass\cf6 (),\cf4  \cf9 "test stack trace"\cf4  \cf6 +\cf4  e\cf6 .\cf4 getStackTrace\cf6 ().\cf4 toString\cf6 ()\cf4  \cf6 \}\cf4  \cf6 \});\cf4 \
+            \cf2 return\cf4  \cf10 0\cf6 ;\cf4 \
+        \cf6 \}\cf4 \
+    \cf6 \}\cf4 \
+\cf6 \}}
